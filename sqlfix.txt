@@ -61,6 +61,14 @@ CREATE TABLE `oc_attribute_value` (
 				UNIQUE KEY `attribute_value_key` (`attribute_id`, `guid`),
 				FOREIGN KEY (`attribute_id`) 			REFERENCES `oc_attribute`(`attribute_id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+			
+CREATE TABLE `oc_option_to_product` (
+				`option_id` 				INT(11) 		NOT NULL,
+				`product_id` 				VARCHAR(64) 	NOT NULL,
+				UNIQUE KEY `option_link` (`option_id`, `product_id`),
+				FOREIGN KEY (`option_id`) 				REFERENCES `oc_option`(`option_id`),
+				FOREIGN KEY (`product_id`) 				REFERENCES `oc_product`(`product_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;			
 
 
 
