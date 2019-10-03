@@ -1,0 +1,66 @@
+CREATE TABLE `oc_product_feature_value` (
+				`product_feature_id` 		INT(11) 		NOT NULL,
+				`product_option_id` 		INT(11) 		NOT NULL,
+				`product_id` 				INT(11) 		NOT NULL,
+				`product_option_value_id` 	INT(11) 		NOT NULL,
+				UNIQUE KEY `product_feature_value_key` (`product_feature_id`, `product_id`, `product_option_value_id`),
+				FOREIGN KEY (`product_feature_id`) 		REFERENCES `oc_product_feature`(`product_feature_id`),
+				FOREIGN KEY (`product_option_id`) 		REFERENCES `oc_product_option`(`product_option_id`),
+				FOREIGN KEY (`product_id`) 				REFERENCES `oc_product`(`product_id`),
+				FOREIGN KEY (`product_option_value_id`)	REFERENCES `oc_product_option_value`(`product_option_value_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `oc_category_to_1c` (
+                                                   `category_id` 				INT(11) 		NOT NULL,
+                                                   `guid` 						VARCHAR(64) 	NOT NULL,
+                                                   `version` 					VARCHAR(32) 	NOT NULL,
+                                                   UNIQUE KEY `category_link` (`category_id`,`guid`),
+                                                   FOREIGN KEY (`category_id`) 			REFERENCES `oc_category`(`category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `oc_product_to_1c` (
+				`product_id` 				INT(11) 		NOT NULL,
+				`guid` 						VARCHAR(64) 	NOT NULL,
+				`version` 					VARCHAR(32) 	NOT NULL,
+				UNIQUE KEY `product_link` (`product_id`, `guid`),
+				FOREIGN KEY (`product_id`) 				REFERENCES `oc_product`(`product_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `oc_manufacturer_to_1c` (
+				`manufacturer_id` 			INT(11) 		NOT NULL,
+				`guid` 						VARCHAR(64) 	NOT NULL,
+				UNIQUE KEY `manufacturer_link` (`manufacturer_id`, `guid`),
+				FOREIGN KEY (`manufacturer_id`) 		REFERENCES `oc_manufacturer`(`manufacturer_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `oc_store_to_1c` (
+				`store_id` 					INT(11) 		NOT NULL,
+				`guid` 						VARCHAR(64) 	NOT NULL,
+				UNIQUE KEY `store_link` (`store_id`, `guid`),
+				FOREIGN KEY (`store_id`) 				REFERENCES `oc_store`(`store_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `oc_attribute_to_1c` (
+				`attribute_id` 				INT(11) 		NOT NULL,
+				`guid`						VARCHAR(64) 	NOT NULL,
+				`type`						VARCHAR(1) 		NOT NULL,
+				`version`					VARCHAR(32) 	NOT NULL,
+				UNIQUE KEY `attribute_link` (`attribute_id`, `guid`),
+				FOREIGN KEY (`attribute_id`) 			REFERENCES `oc_attribute`(`attribute_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `oc_attribute_value` (
+				`attribute_value_id` 		INT(11) 		NOT NULL AUTO_INCREMENT,
+				`attribute_id` 				INT(11) 		NOT NULL,
+				`guid`						VARCHAR(64) 	NOT NULL,
+				`name`						VARCHAR(255) 	NOT NULL,
+				PRIMARY KEY (`attribute_value_id`),
+				UNIQUE KEY `attribute_value_key` (`attribute_id`, `guid`),
+				FOREIGN KEY (`attribute_id`) 			REFERENCES `oc_attribute`(`attribute_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
